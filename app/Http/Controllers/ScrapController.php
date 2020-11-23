@@ -42,6 +42,7 @@ class ScrapController extends Controller
             echo "-> Category: ".$categoryValue."<br />";
             
             //Adds category to database
+            $categoryDB = null;
             $categoryDB = new Category();
             $categoryDB->name = $categoryValue;
             $categoryDB->slug = Str::slug($categoryValue."-".time().$i, '-');
@@ -68,6 +69,7 @@ class ScrapController extends Controller
                     echo "<br />------> Subcategory: ".$subcategoryValue;
 
                     //Adds subcategory to database
+                    $subcategoryDB = null;
                     $subcategoryDB = new Subcategory();
                     $subcategoryDB->name = $subcategoryValue;
                     $subcategoryDB->slug = Str::slug($subcategoryValue."-".time().$j, '-');
@@ -90,7 +92,8 @@ class ScrapController extends Controller
                     
                 }
             }else{
-                $this->getAdvirsements($category_dom);
+                echo "<strong>Product without subcategory ommitting.</strong>";
+                //$this->getAdvirsements($category_dom);
             }
 
             
@@ -98,7 +101,7 @@ class ScrapController extends Controller
         }
 
         //Pasar a CSV
-        //return redirect()->route('advertisements.index');
+        return redirect()->route('advertisements.index');
     }
 
     private function getAdvirsements($category_dom, $subcategoryIdDB = null){
@@ -134,6 +137,7 @@ class ScrapController extends Controller
                     //echo "<br />------------>".$desc;
 
                     //Adds advertisement to database
+                    $advertisementDB = null;
                     $advertisementDB = new Advertisement();
                     $advertisementDB->name = $title;
                     $advertisementDB->slug = Str::slug($title."-".time().$key, '-');
@@ -162,6 +166,7 @@ class ScrapController extends Controller
                     //echo "<br />- - - - - - >".$desc;
 
                     //Adds advertisement to database
+                    $advertisementDB = null;
                     $advertisementDB = new Advertisement();
                     $advertisementDB->name = $title;
                     $advertisementDB->slug = Str::slug($title."-".time().$k, '-');

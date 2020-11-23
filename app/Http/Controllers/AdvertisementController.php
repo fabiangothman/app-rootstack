@@ -20,6 +20,13 @@ class AdvertisementController extends Controller
         if($request->text){
             $advertisements = Advertisement::where('name', 'LIKE', '%'.$request->text.'%')->orWhere('description', 'LIKE', '%'.$request->text.'%')->paginate(10);//->toArray();
         }elseif($request->category_id){
+            /*
+            select `advertisements`.* from `advertisements`
+            inner join `subcategories` on `advertisements`.`subcategory_id` = `subcategories`.`id`
+            inner join `categories` on `subcategories`.`category_id` = `categories`.`id`
+            where `categories`.`id` = 2
+            */
+            
             $advertisements = Advertisement::select('advertisements.*')
             ->join('subcategories', 'advertisements.subcategory_id', 'subcategories.id')
             ->join('categories', 'subcategories.category_id', 'categories.id')->where('categories.id', $request->category_id)->paginate(10);//->toArray();
