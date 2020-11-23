@@ -13,14 +13,14 @@
                 <div class="pt-2 relative mx-auto text-gray-600">
                     <form action="{{route('advertisements.search')}}" method="POST">
                         @csrf
-                        <input value="{{$formReturned['textValue']}}" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="text" placeholder="Name / Descripcion">
+                        <input value="{{$formReturned['textValue']}}" class="w-60 max-w-xs border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="text" placeholder="Name / Descripcion">
                         <input type="submit" value="Search" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"/>
                     </form>
                 </div>
                 <div class="pt-2 relative mx-auto text-gray-600">
                     <form action="{{route('advertisements.search')}}" method="POST">
                         @csrf
-                        <select class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="category_id">
+                        <select class="w-60 max-w-xs border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" type="search" name="category_id">
                             <option value=""></option>
                             @foreach ($categories as $category)
                                 @if ($formReturned['category_idValue']==$category->id)
