@@ -11,7 +11,24 @@ class AdvertisementController extends Controller
 {
     public function index(){
         $advertisements = Advertisement::orderBy('id', 'desc')->paginate(10);
-        return view("advertisements.index", compact('advertisements'));
+        $categories = Category::orderBy('name', 'asc')->get();//->toArray();
+        $formReturned = ['textValue' => null, 'category_idValue' => null];
+        return view("advertisements.index", compact('advertisements', 'categories', 'formReturned'));
+    }
+
+    public function search(Request $request){
+        if($request->text){
+            $advertisements = Advertisement::where('name', 'LIKE', '%'.$request->text.'%')->orWhere('description', 'LIKE', '%'.$request->text.'%')->paginate(10);//->toArray();
+        }elseif($request->category_id){
+            $advertisements = Advertisement::select('advertisements.*')
+            ->join('subcategories', 'advertisements.subcategory_id', 'subcategories.id')
+            ->join('categories', 'subcategories.category_id', 'categories.id')->where('categories.id', $request->category_id)->paginate(10);//->toArray();
+        }else{
+            $advertisements = Advertisement::orderBy('id', 'desc')->paginate(10);
+        }
+        $categories = Category::orderBy('name', 'asc')->get();//->toArray();
+        $formReturned = ['textValue' => $request->text, 'category_idValue' => $request->category_id];
+        return view("advertisements.index", compact('advertisements', 'categories', 'formReturned'));
     }
 
     public function create(){

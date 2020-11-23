@@ -98,7 +98,7 @@ class ScrapController extends Controller
         }
 
         //Pasar a CSV
-        return redirect()->route('advertisements.index');
+        //return redirect()->route('advertisements.index');
     }
 
     private function getAdvirsements($category_dom, $subcategoryIdDB = null){

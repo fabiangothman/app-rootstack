@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('categories', CategoryController::class)->parameters(['categories'=>'category'])->names('categories')->middleware(['auth:sanctum', 'verified']);
 Route::resource('subcategories', SubcategoryController::class)->parameters(['subcategories'=>'subcategory'])->names('subcategories')->middleware(['auth:sanctum', 'verified']);
 
+Route::post('advertisements/search/', [AdvertisementController::class, 'search'])->name('advertisements.search')->middleware(['auth:sanctum', 'verified']);
 Route::get('advertisements/subcategory/{subcategory}', [AdvertisementController::class, 'showsubcategory'])->name('advertisements.subcategory')->middleware(['auth:sanctum', 'verified']);
 Route::resource('advertisements', AdvertisementController::class)->parameters(['advertisements'=>'advertisement'])->names('advertisements')->middleware(['auth:sanctum', 'verified']);
 
